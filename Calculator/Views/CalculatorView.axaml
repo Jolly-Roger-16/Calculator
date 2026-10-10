@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Calculator.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="350"
+             x:Class="Calculator.Views.CalculatorView"
+             x:DataType="vm:CalculatorViewModel">
+
+    <Border Padding="20" Background="White" VerticalAlignment="Center">
+
+        <StackPanel Spacing="15" Width="300">
+            
+            <StackPanel Spacing="5">
+                <TextBlock Text="Выберите арифметическую операцию" FontSize="14"/>
+                <ComboBox ItemsSource="{Binding Operations}" 
+                          SelectedItem="{Binding SelectedOperation}" 
+                          HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                <TextBox Text="{Binding Operand1}" Width="80" Height="30" VerticalContentAlignment="Center"/>
+                <TextBlock Text="{Binding OperationSymbol}" FontSize="18" VerticalAlignment="Center" FontWeight="Bold"/>
+                <TextBox Text="{Binding Operand2}" Width="80" Height="30" VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+            <Button Content="Вычислить" 
+                    Command="{Binding Calculate}" 
+                    HorizontalAlignment="Stretch" 
+                    HorizontalContentAlignment="Center"
+                    Height="35"/>
+
+            <StackPanel Spacing="5">
+                <TextBlock Text="Результат:" FontSize="14"/>
+                <TextBox Text="{Binding Result}" 
+                         IsReadOnly="True" 
+                         Background="#F0F0F0" 
+                         Height="30" 
+                         VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+
+</UserControl>

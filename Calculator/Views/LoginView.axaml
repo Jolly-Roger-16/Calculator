@@ -1,0 +1,60 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Calculator.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
+             x:Class="Calculator.Views.LoginView"
+             x:DataType="vm:LoginViewModel">
+
+    <Border Padding="20">
+        <StackPanel Spacing="15" Width="360"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            <TextBlock Text="Авторизация" FontSize="24"
+                       HorizontalAlignment="Center"/>
+
+            <StackPanel Spacing="5">
+                <TextBlock Text="Логин:"/>
+                <TextBox Text="{Binding Login}"
+                         IsEnabled="{Binding IsInputEnabled}"
+                         Watermark="Введите логин"/>
+            </StackPanel>
+
+            <StackPanel Spacing="5">
+                <TextBlock Text="Пароль:"/>
+                <TextBox Text="{Binding Password}"
+                         IsEnabled="{Binding IsInputEnabled}"
+                         PasswordChar="*"
+                         Watermark="Введите пароль"/>
+            </StackPanel>
+
+            <TextBlock Text="{Binding ErrorMessage}"
+                       Foreground="Red"
+                       TextWrapping="Wrap"/>
+
+            <Button Content="Авторизация"
+                    Command="{Binding LoginCommand}"
+                    IsVisible="{Binding ShowLoginButton}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Height="35"/>
+
+            <StackPanel Spacing="10" IsVisible="{Binding ShowCaptcha}">
+                <TextBlock Text="Введите текст с картинки:"/>
+                <ContentControl Content="{Binding CaptchaCanvas}"
+                                HorizontalAlignment="Center"/>
+                <TextBox Text="{Binding CaptchaInput}"
+                         IsEnabled="{Binding IsInputEnabled}"
+                         Watermark="Текст с картинки"/>
+                <Button Content="Проверить"
+                        Command="{Binding LoginCommand}"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Height="35"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+</UserControl>
