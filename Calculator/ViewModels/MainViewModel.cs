@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using System;
 
 namespace Calculator.ViewModels
 {
@@ -8,21 +9,22 @@ namespace Calculator.ViewModels
 
         public ViewModelBase CurrentPage
         {
-            get => _currentPage;
-            set => this.RaiseAndSetIfChanged(ref _currentPage, value);
+            get { return _currentPage; }
+            set { this.RaiseAndSetIfChanged(ref _currentPage, value); }
         }
 
         public MainViewModel()
         {
-            var loginVm = new LoginViewModel();
+            LoginViewModel loginVm = new LoginViewModel();
 
-
-            loginVm.OnLoginSuccess += () =>
-            {
-                CurrentPage = new CalculatorViewModel();
-            };
+            loginVm.OnLoginSuccess += LoginVm_OnLoginSuccess;
 
             _currentPage = loginVm;
+        }
+
+        private void LoginVm_OnLoginSuccess()
+        {
+            CurrentPage = new CalculatorViewModel();
         }
     }
 }
